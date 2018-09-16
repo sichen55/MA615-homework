@@ -44,7 +44,7 @@ kable_styling(Errorpage, bootstrap_options = "striped", font_size=16 )
 
 # insert pic
 # pic URL:https://github.com/sichen55/MA615-homework.git
-knitr::include_graphics('D:/school material/RStudio/books.JPG')
+knitr::include_graphics('https://github.com/sichen55/MA615-homework/blob/master/books.jpg')
 #finished
 
 ```
