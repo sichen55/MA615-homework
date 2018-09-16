@@ -5,7 +5,33 @@ date: "September 16, 2018"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 ---
+```{r }
+
+options(digits = 3)
+options(scipen = 999)
+
+## produce a dataframe containing probabilities
+prob <- as.data.frame(dpois(x = 0:6, lambda = 2))
+prob <- cbind(prob, cumsum(prob)) ## these probabilities = ppois(0:10,lambda=2)
+prob <- cbind(prob, 1 - prob[,2])
+
+colnames(prob) <- c("prob", "cprob", "tail_prob")
+
+## barplot with mass function and CDF
+df.bar <- barplot(prob$prob,  
+                  main="Poisson mass function, lambda = 2",
+                  names.arg = c("0","1","2","3","4","5","6"),
+                  xlab = "X: Number of misprints on a page", 
+                  ylab = "Probabilty: P(x)",ylim = c(0,1.1), col="red")
+
+lines(x=df.bar, y=prob$cprob, col="yellow")
+points(x=df.bar, y=prob$cprob, pch=16, col="green")
+abline(h=1, lty=2, col = "cyan")
+
+```
+
 
 ```{r }
 library(knitr)
@@ -41,7 +67,10 @@ Errorpage <- kable(errorpage, "html")
 
 # table styling
 kable_styling(Errorpage, bootstrap_options = "striped", font_size=16 )
+```
 
+
+```{r }
 # insert pic
 # pic URL:https://github.com/sichen55/MA615-homework.git
 knitr::include_graphics('https://github.com/sichen55/MA615-homework/blob/master/books.jpg')
