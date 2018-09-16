@@ -1,0 +1,65 @@
+---
+title: "MA615 The problem of misprint"
+author: "Si Chen"
+date: "September 16, 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r }
+library(knitr)
+library(kableExtra)
+
+# suoppose there are usually no more than 6 misprints in one page for the book
+
+m <- c(0:6)
+
+# for each page, it may have 0,1,2,3,4,5,6 misprints.
+
+misprint <- ppois(m,2,lower.tail = FALSE)
+misprint
+
+# use binomial function to count for every 10 page:10,20,30,40,50
+# define each page range
+
+errorpage10 <- dbinom(1,10,misprint)
+errorpage20 <- dbinom(11,20,misprint)
+errorpage30 <- dbinom(21,30,misprint)
+errorpage40 <- dbinom(31,40,misprint)
+errorpage50 <- dbinom(41,50,misprint)
+
+# combine five 10-pages ranges
+errorpage <- cbind(errorpage10, errorpage20, errorpage30, errorpage40, errorpage50)
+
+# set the table names
+colnames(errorpage) <- c("page 1-10","page 11-20","page 21-30","page 31-40","page 41-50")
+rownames(errorpage) <- c("0 error","1 error","2 errors","3 errors","4 errors","5errors","6 errors")
+
+# construct table
+Errorpage <- kable(errorpage, "html")
+
+# table styling
+kable_styling(Errorpage, bootstrap_options = "striped", font_size=16 )
+
+# insert pic
+# pic URL:https://github.com/sichen55/MA615-homework.git
+knitr::include_graphics('D:/school material/RStudio/books.JPG')
+#finished
+
+```
+
+
+  
+
+
+
+
+Note: 
+For every page, use possion distribution to calculate the possibility of making certain number of mistakes.
+
+Use page range by every 10 pages, otherwise if we list every page, we may need to use loop.
+
+Use binomial function to find the error number in each page, where the probability found in step 1 is the p value in binomial equation.
+
+set and style the table to expected structure.
