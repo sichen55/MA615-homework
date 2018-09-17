@@ -3,10 +3,34 @@ title: "MA615 The problem of misprint"
 author: "Si Chen"
 date: "September 16, 2018"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 ---
+
+## 1 Calculate $p_k$
+
+Given the stated mean value of 2 misprints per page, assume the distribution of $M$, the number of misprints on a page, is $Poisson(\lambda = 2)$ 
+
+Conditioned on $k$, a limit to be determined, the probability $p_k$ of more than $k$ misprints on a page is:  
+
+$p_k = P(M > k) = 1 - P(M \leq k) =$ 1 - ppois($k$, lambda = 2).  
+
+
+## 2 Calculate $P(T \leq n | k)$
+
+Probability of $T$ no more than $n$ pages with more than $k$ misprints is:  
+
+$P(T \leq n) =$ pbinom($n$, 50, $p_k$).  
+
+\vspace{.2in}
+
+## 3 Visualize $P(n \leq k)$
+
+For a given $k$, the probability mass and cumulateive distribution functions of errors per page can be visualized as follows:
+\vspace{.2in}
+
+
 ```{r }
 
 options(digits = 3)
@@ -63,7 +87,7 @@ colnames(errorpage) <- c("page 1-10","page 11-20","page 21-30","page 31-40","pag
 rownames(errorpage) <- c("0 error","1 error","2 errors","3 errors","4 errors","5errors","6 errors")
 
 # construct table
-Errorpage <- kable(errorpage, "html")
+Errorpage <- kable(errorpage, "latex")
 
 # table styling
 kable_styling(Errorpage, bootstrap_options = "striped", font_size=16 )
@@ -73,7 +97,7 @@ kable_styling(Errorpage, bootstrap_options = "striped", font_size=16 )
 ```{r }
 # insert pic
 # pic URL:https://github.com/sichen55/MA615-homework.git
-knitr::include_graphics('https://github.com/sichen55/MA615-homework/blob/master/books.jpg')
+knitr::include_graphics('books.JPG')
 #finished
 
 ```
