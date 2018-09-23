@@ -1,0 +1,36 @@
+---
+title: "MA615 assignment2"
+author: "Si Chen"
+date: "September 23, 2018"
+output: 
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r }
+library(tidyverse)
+# get data
+data("LakeHuron")
+# set data frame 
+LakeHuron <- data.frame("year" = 1875:1972, "level" = LakeHuron)
+```
+
+```{r }
+
+# plot data and customize the format
+
+ggplot(data = LakeHuron)+geom_point(mapping = aes(x = year, y = level))
+
+ggplot(data = LakeHuron)+geom_smooth(mapping = aes(x = year, y = level))
+
+
+# no variance needed, set se = false,
+
+ggplot(data = LakeHuron)+
+  geom_point(mapping = aes(x = year,y = level))+
+  geom_smooth(mapping = aes(x = year,y = level), se = FALSE)
+
+```
