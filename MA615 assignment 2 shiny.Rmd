@@ -8,6 +8,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+suppressMessages(library(tidyverse))
 ```
 
 ```{r }
@@ -31,6 +32,6 @@ ggplot(data = LakeHuron)+geom_smooth(mapping = aes(x = year, y = level))
 
 ggplot(data = LakeHuron)+
   geom_point(mapping = aes(x = year,y = level))+
-  geom_smooth(mapping = aes(x = year,y = level), se = FALSE)
+  geom_line(mapping = aes(x = year,y = level), se = FALSE)
 
 ```
